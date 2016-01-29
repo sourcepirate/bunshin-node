@@ -1,7 +1,5 @@
 var assert = require('assert');
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
-var Version = require('../lib/store.js');
+var Store = require('../lib/store.js')("mock");
 
 function isEmpty(obj){
   if (obj == null) return true;
@@ -15,32 +13,32 @@ function isEmpty(obj){
 describe('Store suite', function() {
 
   before(function(done) {
-    var persistData = [{
-      version: '0.0.1',
-      port: 9000,
-      directory: '/home'
-    }, {
-      version: '0.0.2',
-      port: 9001,
-      directory: '/home'
-    }, {
-      version: '0.0.3',
-      port: 9002,
-      directory: '/hello'
-    }, {}];
-    persistData.forEach(function(data){
-      if(!isEmpty(data)){
-        var version = new Version(data);
-        version.save();
-      }else{
-        done();
-      }
+     Store.create('1.0.0', 9090, "/home/github");
+     Store.create('1.0.1', 9091, "/home/app2");
+     done();
+  });
+
+  describe('Should CRUD Properly',function(){
+
+    it('should read', function(done){
+      var entry = Store.get('1.0.0');
+      assert.ok(entry);
+      done();
     });
+
+    it('should update', function(done){
+      Store.update('1.0.0', {port: 10020});
+      entry = Store.get('1.0.0');
+      assert.ok(entry.data.port == 10020)
+      done();
+    });
+
+    it('should delete', function(done){
+      Store.delete('1.0.0');
+      entry = Store.get('1.0.0');
+      assert.ok(!entry);
+      done();
+    });
+
   });
-
-  it('should run', function(){
-     assert.ok(true);
-  });
-
-
 });

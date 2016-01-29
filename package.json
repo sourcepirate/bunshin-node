@@ -1,7 +1,7 @@
 {
   "name": "node-staging",
   "version": "0.0.5",
-  "description": "Manage Staging environments with node.js",
+  "description": "Manage environments with node.js",
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/"
@@ -13,8 +13,8 @@
   "license": "MIT",
   "dependencies": {
     "connect": "^3.4.1",
+    "diskdb": "^0.1.14",
     "http-proxy": "^1.13.0",
-    "mongoose": "^4.3.7",
     "node-http-proxy": "^0.2.3",
     "vhost": "^3.0.2"
   },
