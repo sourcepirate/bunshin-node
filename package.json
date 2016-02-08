@@ -12,6 +12,7 @@
   "author": "plasmashadow",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^1.1.1",
     "chokidar": "latest",
     "diskdb": "^0.1.14",
     "http-proxy": "^1.13.0"
